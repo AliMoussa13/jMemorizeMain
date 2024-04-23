@@ -1,0 +1,18 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/svnant.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jcommon-1.0.8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/csv.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/junit.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/servlet.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/itext-1.4.8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/svnjavahl.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/forms-1.0.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/svnClientAdapter.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jfreechart-1.0.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
