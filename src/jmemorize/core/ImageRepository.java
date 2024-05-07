@@ -43,54 +43,54 @@ public class ImageRepository
 
     public static final String IMG_ID_PREFIX = "::";    
     
-    private static ImageRepository m_instance;
+    private static ImageRepository mInstance;
 
-    private Map<String, ImageItem> m_imageMap    = new HashMap<String, ImageItem>();
-    private LinkedList<ImageIcon>  m_imageCache  = new LinkedList<ImageIcon>();
+    private Map<String, ImageItem> mImageMap = new HashMap<>();
+    private LinkedList<ImageIcon> mImageCache = new LinkedList<>();
 
     private static final Pattern   FILE_PATTERN = Pattern.compile("(.*)_(\\d+)");
     
     public class ImageItem
     {
-        private String    m_sourceFile;
-        private byte[]    m_bytes;
-        private String    m_id;  
+        private String mSourceFile;
+        private byte[] mBytes;
+        private String mId;
  
         public ImageItem(InputStream in, String filename) 
             throws IOException
         {
-            m_sourceFile = filename;
-            m_id = createId(filename);
-            m_bytes = readFile(in);
+            mSourceFile = filename;
+            mId = createId(filename);
+            mBytes = readFile(in);
         }
         
         public ImageIcon getImage()
         {
-            ImageIcon image = new ImageIcon(m_bytes);
-            image.setDescription(IMG_ID_PREFIX + m_id);
+            ImageIcon image = new ImageIcon(mBytes);
+            image.setDescription(IMG_ID_PREFIX + mId);
             
             return image;
         }
 
         public String getId()
         {
-            return m_id;
+            return mId;
         }
         
         public String getFile()
         {
-            return m_sourceFile;
+            return mSourceFile;
         }
         
         public byte[] getBytes()
         {
-            return m_bytes;
+            return mBytes;
         }
         
         @Override
         public String toString()
         {
-            return m_id;
+            return mId;
         }
 
         private String createId(String filename)
@@ -138,61 +138,54 @@ public class ImageRepository
   
     public static ImageRepository getInstance() 
     {
-        if (m_instance == null)
-            m_instance = new ImageRepository();
+        if (mInstance == null)
+            mInstance = new ImageRepository();
 
-        return m_instance;
+        return mInstance;
     }
     
     public Set<String> getKeys()
     {
-        return m_imageMap.keySet();
+        return mImageMap.keySet();
     }
     
     public Collection<ImageItem> getImageItems() // TODO dont give imageItem to outside
     {
-        return m_imageMap.values();
+        return mImageMap.values();
     }
     
     public ImageIcon getImage(String imageId)
     {
-        for (ImageIcon icon : m_imageCache)
+        for (ImageIcon icon : mImageCache)
         {
             if (equals(icon, imageId))
             {
-                m_imageCache.remove(icon);
-                m_imageCache.addFirst(icon);
+                mImageCache.remove(icon);
+                mImageCache.addFirst(icon);
                 
                 return icon;
             }
         }
         
-        ImageItem imageItem = m_imageMap.get(imageId);
+        ImageItem imageItem = mImageMap.get(imageId);
         
         if (imageItem == null)
             return null;
         
         ImageIcon icon = imageItem.getImage();
-        m_imageCache.addFirst(icon);
+        mImageCache.addFirst(icon);
         
-        if (m_imageCache.size() > MAX_CACHED_IMAGES) // HACK check for memory usage instead
-            m_imageCache.removeLast();
+        if (mImageCache.size() > MAX_CACHED_IMAGES) // HACK check for memory usage instead
+            mImageCache.removeLast();
         
         return icon;
     }
     
     public String addImage(InputStream in, String filename) throws IOException
     {
-        // TOOD check if image already in our map
-//        for (ImageItem item : m_imageMap.values())
-//        {
-//            if (item.getFile().equals(filename))
-//                return item.getId();
-//        }
-        
         ImageItem item = new ImageItem(in, filename);
         String id = item.getId();
-        m_imageMap.put(id, item);
+        mImageMap.put(id, item);
         
         return id;
     }
@@ -241,7 +234,7 @@ public class ImageRepository
      */
     public List<String> addImages(List<ImageIcon> images)
     {
-        List<String> imageIDs = new LinkedList<String>();
+        List<String> imageIDs = new LinkedList<>();
         for (ImageIcon icon : images)
         {
             try
@@ -262,13 +255,13 @@ public class ImageRepository
      */
     public void retain(Set<String> retainIDs)
     {
-        Set<String> toBeRemoved = new HashSet<String>(m_imageMap.keySet());
+        Set<String> toBeRemoved = new HashSet<>(mImageMap.keySet());
         
         for (String id : retainIDs)
             toBeRemoved.remove(id);
         
         for (String id : toBeRemoved)
-            m_imageMap.remove(id);
+            mImageMap.remove(id);
     }
     
     public static boolean equals(ImageIcon image, String id)
@@ -323,7 +316,7 @@ public class ImageRepository
     
     public void clear()
     {
-        m_imageMap.clear();        
+        mImageMap.clear();
     }
     
     private ImageRepository() // singleton

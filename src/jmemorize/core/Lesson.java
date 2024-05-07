@@ -30,11 +30,11 @@ import jmemorize.gui.Localization;
 public class Lesson implements CategoryObserver 
 {
     /** True if this lesson has been modified since last save or load process */
-    private boolean           m_canSave = false;
-    private File              m_file;
+    private boolean mCanSave = false;
+    private File mFile;
     
-    private Category          m_rootCategory;
-    private LearnHistory      m_learnHistory = new LearnHistory();
+    private Category mRootCategory;
+    private LearnHistory mLearnHistory = new LearnHistory();
     
     public Lesson(boolean canSave)
     {
@@ -55,7 +55,7 @@ public class Lesson implements CategoryObserver
      */
     public File getFile()
     {
-        return m_file;
+        return mFile;
     }
     
     /**
@@ -63,12 +63,12 @@ public class Lesson implements CategoryObserver
      */
     public void setFile(File file)
     {
-        m_file = file;
+        mFile = file;
     }
     
     public LearnHistory getLearnHistory()
     {
-        return m_learnHistory;
+        return mLearnHistory;
     }
     
     /**
@@ -76,7 +76,7 @@ public class Lesson implements CategoryObserver
      */
     public boolean canSave()
     {
-        return m_canSave;
+        return mCanSave;
     }
     
     /**
@@ -84,7 +84,7 @@ public class Lesson implements CategoryObserver
      */
     public Category getRootCategory()
     {
-        return m_rootCategory;
+        return mRootCategory;
     }
     
     /*
@@ -113,7 +113,7 @@ public class Lesson implements CategoryObserver
      */
     public Lesson cloneWithoutProgress()
     {
-        return new Lesson(m_rootCategory.cloneWithoutProgress(), true);
+        return new Lesson(mRootCategory.cloneWithoutProgress(), true);
     }
     
     /* (non-Javadoc)
@@ -149,7 +149,7 @@ public class Lesson implements CategoryObserver
     
     public void setCanSave(boolean canSave) // TODO make private
     {
-        m_canSave = canSave;
+        mCanSave = canSave;
     }
     
     /**
@@ -161,10 +161,10 @@ public class Lesson implements CategoryObserver
      */
     private void setRootCategory(Category rootCategory)
     {
-        assert m_rootCategory == null;
+        assert mRootCategory == null;
         
-        m_rootCategory = rootCategory;
-        m_rootCategory.addObserver(this);
+        mRootCategory = rootCategory;
+        mRootCategory.addObserver(this);
     }
 }
 
