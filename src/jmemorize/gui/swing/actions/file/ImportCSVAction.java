@@ -58,7 +58,8 @@ public class ImportCSVAction extends AbstractImportAction
             JOptionPane.QUESTION_MESSAGE, 
             null, 
             charsets, 
-            "ISO-8859-1");
+            //"ISO-8859-1");
+                "UTF-8");
         
         /*
          * someone reported a bug (with stack tracke) where altough selection

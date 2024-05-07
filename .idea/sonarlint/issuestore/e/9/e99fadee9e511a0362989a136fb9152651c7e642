@@ -1,0 +1,13 @@
+
+?
+java:S1604»"(Make this anonymous inner class a lambda(•Æİ
+D
+java:S1604Ä"(Make this anonymous inner class a lambda(ÖØï£ıÿÿÿÿ
+?
+java:S1604Í"(Make this anonymous inner class a lambda(™¬ŞÔ
+i	java:S116a"TRename this field "m_manager" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(³ªÖÆ
+k	java:S116b"VRename this field "m_cardPanel" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ºüŸ›
+w	java:S116c"]Rename this field "m_createMoreButton" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(úèŞƒüÿÿÿÿ
+w	java:S116d"]Rename this field "m_editRecentAction" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(À€öÂûÿÿÿÿ
+G
+java:S1874D"1Remove this use of "CTRL_MASK"; it is deprecated.(ÒÆí

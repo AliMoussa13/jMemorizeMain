@@ -1,0 +1,38 @@
+
+u
+java:S2293‰"YReplace the type specification in this constructor call with the diamond operator ("<>").(¨„¡²şÿÿÿÿ
+p
+java:S2293—"YReplace the type specification in this constructor call with the diamond operator ("<>").(Ì¶ˆ£
+Q
+java:S1141¬"5Extract this nested try block into a separate method.(ç£êúÿÿÿÿ
+?
+java:S1604õ"(Make this anonymous inner class a lambda(¬ıŠ¿
+m	java:S116w"XRename this field "m_categoryBox" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(“İ¤ä
+n	java:S116x"YRename this field "m_categoryTree" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¡âª±
+p	java:S116y"[Rename this field "m_deckTablePanel" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(½ÖÍó
+u	java:S116z"[Rename this field "m_deckChartPanel" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Õ‘ğ’øÿÿÿÿ
+l	java:S116{"WRename this field "m_learnPanel" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ùÀ
+j	java:S116|"VRename this field "m_statusBar" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¹¯‚P
+u	java:S116}"[Rename this field "m_newCardManager" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‘Ìğÿÿÿÿÿ
+s	java:S116€"XRename this field "m_bottomPanel" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(à«š§üÿÿÿÿ
+q	java:S116"[Rename this field "m_showTreeButton" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Æ‹¦·
+v	java:S116‚"`Rename this field "m_horizontalSplitPane" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ªÅÔ›
+y	java:S116ƒ"^Rename this field "m_verticalSplitPane" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(şä×Õüÿÿÿÿ
+v	java:S116„"[Rename this field "m_treeScrollPane" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(´¾°öşÿÿÿÿ
+g	java:S116†"QRename this field "m_main" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(€Øú„
+k	java:S116‡"URename this field "m_category" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¯™ø
+g	java:S116ˆ"QRename this field "m_deck" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(™ŠŒâ
+z	java:S116‰"_Rename this field "m_selectionObservers" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¨„¡²şÿÿÿÿ
+x	java:S116Œ"]Rename this field "m_showCategoryTree" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ğßîúÿÿÿÿ
+v	java:S116"`Rename this field "m_showCategoryTreeOld" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(©¯”æ
+t	java:S116"^Rename this field "m_categoryTreeWidth" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(†ßÈ
+y	java:S116“"^Rename this field "m_focusedCategories" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(…ãÙßüÿÿÿÿ
+`
+java:S1124n"EReorder the modifiers to comply with the Java Language Specification.(Ô›¤¦ûÿÿÿÿ
+W	java:S125š"<This block of commented-out lines of code should be removed.(¶Œå°ûÿÿÿÿ
+N
+java:S1135"2Complete the task associated to this TODO comment.(Âş„Ùûÿÿÿÿ
+N
+java:S1135ø"2Complete the task associated to this TODO comment.(–†À¡ÿÿÿÿÿ
+V
+java:S1161Ù":Add the "@Override" annotation above this method signature(šüİûÿÿÿÿ

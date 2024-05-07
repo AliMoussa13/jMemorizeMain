@@ -1,0 +1,35 @@
+
+o
+java:S2293k"YReplace the type specification in this constructor call with the diamond operator ("<>").(ş¤Ôç
+u
+java:S2293‘"YReplace the type specification in this constructor call with the diamond operator ("<>").(·ÈÂ€úÿÿÿÿ
+p
+java:S2293²"YReplace the type specification in this constructor call with the diamond operator ("<>").(ÅÃÜÉ
+u
+java:S2293Ê"YReplace the type specification in this constructor call with the diamond operator ("<>").(›ÿÀúÿÿÿÿ
+D
+java:S1604—"(Make this anonymous inner class a lambda(àìı½üÿÿÿÿ
+D
+java:S1604ò"(Make this anonymous inner class a lambda( ù‹±üÿÿÿÿ
+?
+java:S1604û"(Make this anonymous inner class a lambda(™¬ŞÔ
+?
+java:S1604‚"(Make this anonymous inner class a lambda(¹Ëš™
+t	java:S116k"_Rename this field "m_selectionObservers" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ş¤Ôç
+u	java:S116m"[Rename this field "m_nextCardAction" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÂåäÍøÿÿÿÿ
+t	java:S116n"_Rename this field "m_previousCardAction" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ô’¬Å
+m	java:S116p"XRename this field "m_currentCard" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(²üçš
+r	java:S116q"]Rename this field "m_currentCardIndex" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¸‡÷ñ
+l	java:S116r"RRename this field "m_cards" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(½€§Æıÿÿÿÿ
+j	java:S116s"URename this field "m_category" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¯™ø
+m	java:S116v"XRename this field "m_applyButton" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(÷–ºç
+r	java:S116x"XRename this field "m_headerPanel" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(©¨éÛúÿÿÿÿ
+k	java:S116y"VRename this field "m_cardPanel" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ºüŸ›
+k
+java:S3008{"URename this field "m_instance" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(•í‡
+´
+java:S6548D"˜A Singleton implementation was detected. Make sure the use of the Singleton pattern is required and the implementation is the right one for the context.(™ã¦ÿÿÿÿÿ
+]
+java:S1126¹"AReplace this if-then-else statement by a single return statement.(©ƒ¶³üÿÿÿÿ
+W	java:S125ä"<This block of commented-out lines of code should be removed.(ÂØúÿÿÿÿ
+R	java:S125”"<This block of commented-out lines of code should be removed.(±ÕÔÖ

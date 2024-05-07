@@ -21,7 +21,7 @@ package jmemorize.gui.swing.actions.file;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 import jmemorize.core.Lesson;
 import jmemorize.core.io.CsvBuilder;
@@ -47,7 +47,7 @@ public class ExportToCSVAction extends AbstractExportAction
     protected void doExport(Lesson lesson, File file) throws IOException
     {
         FileOutputStream out = new FileOutputStream(file);
-        CsvBuilder.exportLesson(out, lesson, ',', Charset.forName("UTF-8"));
+        CsvBuilder.exportLesson(out, lesson, ',', StandardCharsets.UTF_8);
     }
 
     /* (non-Javadoc)
