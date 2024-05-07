@@ -89,6 +89,7 @@ public class SaveLessonAction extends AbstractSessionDisabledAction
     /* (non-Javadoc)
      * @see jmemorize.gui.swing.actions.AbstractSessionDisabledAction
      */
+    @Override
     protected void updateEnablement()
     {
         Main main = Main.getInstance();

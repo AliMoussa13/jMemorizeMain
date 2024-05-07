@@ -1,0 +1,32 @@
+
+J
+java:S3740Z"/Provide the parametrized type for this generic.(Á¯÷Õøÿÿÿÿ
+J
+java:S3740Z"/Provide the parametrized type for this generic.(Á¯÷Õøÿÿÿÿ
+E
+java:S3740»"/Provide the parametrized type for this generic.(ïÿø<
+p	java:S116R"VRename this field "m_cardTable" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¢Ùµþúÿÿÿÿ
+t	java:S116Z"ZRename this field "m_searchTextBox" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Á¯÷Õøÿÿÿÿ
+s	java:S116["^Rename this field "m_recentSearchTexts" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(À¥¯¯
+s	java:S116^"YRename this field "m_matchCaseBox" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÜôÂüÿÿÿÿ
+o	java:S116`"[Rename this field "m_radioBothSides" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(€¤É3
+p	java:S116b"[Rename this field "m_radioFrontSide" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(óìÇ‹
+t	java:S116d"ZRename this field "m_radioBackSide" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(âï·±ÿÿÿÿÿ
+m	java:S116g"XRename this field "m_categoryBox" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(õ¼Öç
+j	java:S116h"VRename this field "m_statusBar" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¹¯‚P
+l	java:S116k"WRename this field "m_searchText" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¶ñ
+r	java:S116l"XRename this field "m_searchSides" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¸÷æÄÿÿÿÿÿ
+p	java:S116m"VRename this field "m_matchCase" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ïØ¨€þÿÿÿÿ
+u	java:S116n"[Rename this field "m_searchCategory" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¼ÒñÛûÿÿÿÿ
+p
+java:S3008p"URename this field "m_instance" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Š µÌúÿÿÿÿ
+´
+java:S6548M"˜A Singleton implementation was detected. Make sure the use of the Singleton pattern is required and the implementation is the right one for the context.(”©É¥úÿÿÿÿ
+[
+java:S1124P"EReorder the modifiers to comply with the Java Language Specification.(ÌÀïÝ
+
+java:S1186Ã"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ºøéàûÿÿÿÿ
+˜
+java:S1186Ï"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(í¿Þì
+Q
+java:S1161®":Add the "@Override" annotation above this method signature(·øÏƒ

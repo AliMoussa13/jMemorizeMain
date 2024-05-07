@@ -1,0 +1,43 @@
+
+p
+java:S2293Â"YReplace the type specification in this constructor call with the diamond operator ("<>").(´Ç„é
+u
+java:S2293„"YReplace the type specification in this constructor call with the diamond operator ("<>").(Õù‘‡üÿÿÿÿ
+u
+java:S2293´"YReplace the type specification in this constructor call with the diamond operator ("<>").(Ñ¿Üñÿÿÿÿÿ
+\
+java:S2184ß"@Cast one of the operands of this addition operation to a "long".(®÷Àşüÿÿÿÿ
+\
+java:S2184÷"@Cast one of the operands of this addition operation to a "long".(ÛÙ½ƒúÿÿÿÿ
+\
+java:S2184"@Cast one of the operands of this addition operation to a "long".(ëŒõÖûÿÿÿÿ
+l	java:S116Â"VRename this field "m_summaries" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(´Ç„é
+l	java:S116Ä"QRename this field "m_file" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÃçÜåùÿÿÿÿ
+p	java:S116Å"URename this field "m_isLoaded" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ù©øÚùÿÿÿÿ
+l	java:S1169"RRename this field "m_start" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(êõ¸¤ùÿÿÿÿ
+j	java:S116:"PRename this field "m_end" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Æ¥Øšÿÿÿÿÿ
+j	java:S116;"URename this field "m_duration" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ªò˜˜
+m	java:S116="SRename this field "m_passed" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(§¡ÿñıÿÿÿÿ
+g	java:S116>"SRename this field "m_failed" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(È¶–r
+h	java:S116?"TRename this field "m_skipped" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ƒ”Áp
+p	java:S116@"VRename this field "m_relearned" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(áßúøÿÿÿÿ
+o
+java:S2975ƒ"SRemove this "clone" implementation; use a copy constructor or copy factory instead.(ŒÉ¯æşÿÿÿÿ
+[
+java:S3358¹"DExtract this nested ternary operation into an independent statement.(ñ¢ş¹
+I
+java:S1135Á"2Complete the task associated to this TODO comment.(®ĞÔ¨
+U
+java:S1155ñ">Use isEmpty() to check whether the collection is empty or not.(‹ëîì
+M
+java:S1905ô"1Remove this unnecessary cast to "SessionSummary".(àÂŠ“ûÿÿÿÿ
+H
+java:S1135‰"2Complete the task associated to this TODO comment.(œÈî
+N
+java:S1135Ï"2Complete the task associated to this TODO comment.(»¹’¯şÿÿÿÿ
+M
+java:S1905 "1Remove this unnecessary cast to "SessionSummary".(ÊÓåƒÿÿÿÿÿ
+H
+java:S1905¡"1Remove this unnecessary cast to "SessionSummary".(şˆ¡±
+F
+java:S2093Ã"*Change this "try" to a try-with-resources.(ç£êúÿÿÿÿ

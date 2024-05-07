@@ -1,0 +1,23 @@
+
+^
+java:S2184É"BCast one of the operands of this addition operation to a "double".(¨š‚ºşÿÿÿÿ
+s	java:S116@"^Rename this field "m_amountToTestFront" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¨íø…
+w	java:S116A"]Rename this field "m_amountToTestBack" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÆìÎøÿÿÿÿ
+p	java:S116C"[Rename this field "m_schedulePreset" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(®Æşù
+o	java:S116D"URename this field "m_schedule" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(·ŒÃâùÿÿÿÿ
+	java:S116F"gRename this field "m_fixedExpirationTimeEnabled" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÏŞíİıÿÿÿÿ
+u	java:S116G"`Rename this field "m_fixedExpirationHour" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(£Çñà
+|	java:S116H"bRename this field "m_fixedExpirationMinute" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ˆ¨åşÿÿÿÿ
+k	java:S116J"VRename this field "m_limitTime" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ù¿‰Ù
+s	java:S116K"^Rename this field "m_retestFailedCards" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ı¹¯
+l	java:S116L"RRename this field "m_sides" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ºìîŒûÿÿÿÿ
+v	java:S116M"\Rename this field "m_groupByCategory" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÊÉ†ÿÿÿÿÿ
+t	java:S116N"ZRename this field "m_categoryOrder" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÒËŞ·üÿÿÿÿ
+s	java:S116O"YRename this field "m_shuffleRatio" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‹û´üÿÿÿÿ
+x	java:S116Q"^Rename this field "m_limitCardsEnabled" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ù‹ê™şÿÿÿÿ
+q	java:S116R"]Rename this field "m_limitTimeEnabled" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ş¨£X
+l	java:S116S"WRename this field "m_limitCards" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‡ÖÜŒ
+8
+java:S2386+"Make this member "protected".(ş’„¹ıÿÿÿÿ
+A
+java:S1197«"*Move the array designators [] to the type.(•‰Ê´
