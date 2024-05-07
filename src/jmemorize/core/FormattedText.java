@@ -19,12 +19,8 @@
 package jmemorize.core;
 
 import java.awt.Dimension;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -72,16 +68,14 @@ public class FormattedText implements Cloneable
     private static final String  TAGS = "<(/?(b|i|u|sub|sup)?)>";
     private static final Pattern TEXT_PATTERN = Pattern.compile(
         "(.*?)<(/?(b|i|u|sub|sup)?)>", Pattern.DOTALL);
-    
-//    private static final Pattern IMG_PATTERN = Pattern.compile(
-//        "<img id=\"(.*?)\"/>", Pattern.DOTALL);
+
     
     private static final String CONTENT_ELEMENT_NAME = "content";
     
-    private String                     m_formattedText;
-    private String                     m_unformattedText;
+    private String mFormattedText;
+    private String mUnformattedText;
 
-    private static Map<String, Object> stylesMap = new HashMap<String, Object>();
+    private static Map<String, Object> stylesMap = new HashMap<>();
     
     static
     {
@@ -91,8 +85,8 @@ public class FormattedText implements Cloneable
     public static FormattedText formatted(String formatted)
     {
         FormattedText text = new FormattedText();
-        text.m_formattedText = formatted;
-        text.m_unformattedText = unescape(formatted.replaceAll(TAGS, "").replaceAll("<img .*?/>", ""));
+        text.mFormattedText = formatted;
+        text.mUnformattedText = unescape(formatted.replaceAll(TAGS, "").replaceAll("<img .*?/>", ""));
         
         return text;
     }
@@ -119,8 +113,8 @@ public class FormattedText implements Cloneable
     public static FormattedText unformatted(String unformatted)
     {
         FormattedText text = new FormattedText();
-        text.m_formattedText = unformatted;
-        text.m_unformattedText = unformatted;
+        text.mFormattedText = unformatted;
+        text.mUnformattedText = unformatted;
         
         return text;
     }
@@ -146,12 +140,12 @@ public class FormattedText implements Cloneable
     
     public String getFormatted()
     {
-        return m_formattedText;
+        return mFormattedText;
     }
 
     public String getUnformatted()
     {
-        return m_unformattedText;
+        return mUnformattedText;
     }
     
     // TODO rename to toStyledDocument
@@ -163,7 +157,7 @@ public class FormattedText implements Cloneable
         
         try
         {
-            decode(doc, m_formattedText, 0);
+            decode(doc, mFormattedText, 0);
         } 
         catch (Exception e)
         {
@@ -177,7 +171,7 @@ public class FormattedText implements Cloneable
     {
         try
         {
-            decode(doc, m_formattedText, offset);
+            decode(doc, mFormattedText, offset);
         } 
         catch (Exception e)
         {
@@ -190,7 +184,7 @@ public class FormattedText implements Cloneable
      */
     public String toString()
     {
-        return m_unformattedText;
+        return mUnformattedText;
     }
     
     /* (non-Javadoc)
@@ -218,7 +212,7 @@ public class FormattedText implements Cloneable
         if (obj instanceof FormattedText)
         {
             FormattedText other = (FormattedText)obj;
-            return m_formattedText.equals(other.m_formattedText);
+            return mFormattedText.equals(other.mFormattedText);
         }
         
         return false;
@@ -229,7 +223,7 @@ public class FormattedText implements Cloneable
      */
     public int hashCode()
     {
-        return m_formattedText.hashCode();
+        return mFormattedText.hashCode();
     }
     
     private static String removeRedundantTags(String formattedText)
@@ -279,37 +273,7 @@ public class FormattedText implements Cloneable
                 Main.logThrowable("Error formatting text", e1);
             }
         } 
-//        else if (e.getName().equals(StyleConstants.ParagraphConstants.ComponentElementName))
-//        {
-//            AttributeSet attr = e.getAttributes();
-//            JLabel label = (JLabel)attr.getAttribute(
-//                StyleConstants.ParagraphConstants.ComponentAttribute);
-//            
-//            ImageIcon icon = (ImageIcon)label.getIcon();
-//            String description = icon.getDescription();
-//            
-//            try
-//            {
-//                String id = "";
-//                if (description.startsWith(ImageRepository.IMG_ID_PREFIX))
-//                {
-//                    id = description.substring(2);
-//                }
-//                else
-//                {
-//                    File file = new File(description);
-//                    FileInputStream in = new FileInputStream(file);
-//                    id = ImageRepository.getInstance().addImage(in, file.getName());
-//                }
-//                
-//                sb.insert(0, "<img id=\""+ id +"\"/>");
-//            }
-//            catch (IOException e1)
-//            {
-//                e1.printStackTrace();
-//                Main.logThrowable("Error formatting image", e1);
-//            }
-//        }
+
         else
         {
             for (int i = 0; i < e.getElementCount(); i++)
@@ -357,8 +321,6 @@ public class FormattedText implements Cloneable
     {
         StringBuffer sb = new StringBuffer(text);
         
-//        Map<Integer, ImageIcon> images = decodeImages(doc, sb);
-        
         /*
          * problem we need to decode the images first and remove the strings
          * from the overall string, because pattern searching takes too long.
@@ -394,40 +356,7 @@ public class FormattedText implements Cloneable
         
         String restText = unescape(sb.substring(end));
         doc.insertString(offset, restText, new SimpleAttributeSet());
-        
-//        for (Entry<Integer, ImageIcon> entry : images.entrySet())
-//        {            
-//            ImageIcon icon = entry.getValue();
-//            Integer iconOffset = entry.getKey();
-//            insertImage(doc, icon, iconOffset);
-//        }
     }
-
-    // TODO move this back into decode
-//    private Map<Integer, ImageIcon> decodeImages(StyledDocument doc, StringBuffer text) 
-//        throws BadLocationException, ParseException
-//    {
-//        Map<Integer, ImageIcon> images = new HashMap<Integer, ImageIcon>();
-//        
-//        Matcher m = IMG_PATTERN.matcher(text);
-//
-//        while (m.find())
-//        {
-//            String id = m.group(1);
-//            
-//            int offset = m.start(0);
-//            text.replace(offset, m.end(0), "");
-//            
-//            ImageIcon img = ImageRepository.getInstance().getImage(id);
-//            
-//            if (img == null)
-//                throw new ParseException("Image with id "+id+" wasn't found in image repository.");
-//            
-//            images.put(offset, img);
-//        }
-//        
-//        return images;
-//    }
     
     private static boolean hasStyle(AttributeSet attr, Object styleId)
     {

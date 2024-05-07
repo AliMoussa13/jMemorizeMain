@@ -75,40 +75,40 @@ public class Main extends Observable implements LearnSessionProvider,
     public static final File            STATS_FILE               = 
         new File(System.getProperty("user.home")+"/.jmemorize-stats.xml"); //$NON-NLS-1$ //$NON-NLS-2$
 
-    private RecentItems                 m_recentFiles           = 
+    private RecentItems mRecentFiles =
         new RecentItems(5, USER_PREFS.node("recent.files"));        //$NON-NLS-1$
 
-    private static Main                 m_instance;                                                
+    private static Main mInstance;
     
-    private MainFrame                   m_frame;
-    private Lesson                      m_lesson;
-    private LearnSettings               m_learnSettings;
-    private LearnHistory                m_globalLearnHistory;
-    private int                         m_runningSessions       = 0;
+    private MainFrame mFrame;
+    private Lesson mLesson;
+    private LearnSettings mLearnSettings;
+    private LearnHistory mGlobalLearnHistory;
+    private int mRunningSessions = 0;
 
     // observers
-    private List<LessonObserver>        m_lessonObservers       = 
-        new LinkedList<LessonObserver>();
-    private List<LearnSessionObserver>  m_learnSessionObservers = 
-        new LinkedList<LearnSessionObserver>();
-    private List<ProgramEndObserver>    m_programEndObservers   = 
-        new LinkedList<ProgramEndObserver>();
+    private List<LessonObserver> mLessonObservers =
+        new LinkedList<>();
+    private List<LearnSessionObserver> mLearnSessionObservers =
+        new LinkedList<>();
+    private List<ProgramEndObserver> mProgramEndObservers =
+        new LinkedList<>();
     
     // simple logging support
     private static final Logger     logger = Logger.getLogger("jmemorize");
-    private static Throwable        m_lastLoggedThrowable;
+    private static Throwable mLastLoggedThrowable;
     
     /**
      * @return the singleton instance of Main.
      */
     public static Main getInstance()
     {
-        if (m_instance == null)
+        if (mInstance == null)
         {
-            m_instance = new Main();
+            mInstance = new Main();
         }
         
-        return m_instance;
+        return mInstance;
     }
     
     public static Date getNow()
@@ -135,20 +135,20 @@ public class Main extends Observable implements LearnSessionProvider,
      */
     public void setLesson(Lesson lesson)
     {
-        Lesson oldLesson = m_lesson;
-        m_lesson = lesson;
+        Lesson oldLesson = mLesson;
+        mLesson = lesson;
         
         if (oldLesson != null)
         {
             fireLessonClosed(oldLesson);
         }
         
-        if (m_frame != null) // TODO remove call
+        if (mFrame != null) // TODO remove call
         {
-            m_frame.setLesson(m_lesson);
+            mFrame.setLesson(mLesson);
         }
         
-        fireLessonLoaded(m_lesson);
+        fireLessonLoaded(mLesson);
     }
 
     /* (non-Javadoc)
@@ -164,14 +164,14 @@ public class Main extends Observable implements LearnSessionProvider,
             XmlBuilder.loadFromXMLFile(file, lesson);
             lesson.setFile(file);
             lesson.setCanSave(false);
-            m_recentFiles.push(file.getAbsolutePath());
+            mRecentFiles.push(file.getAbsolutePath());
             
             setLesson(lesson);
             //startExpirationTimer(); TODO expiration timer
         } 
         catch (Exception e)
         {
-            m_recentFiles.remove(file.getAbsolutePath());
+            mRecentFiles.remove(file.getAbsolutePath());
             logThrowable("Error loading lesson", e);
             throw new IOException(e.getMessage());
         }
@@ -192,9 +192,9 @@ public class Main extends Observable implements LearnSessionProvider,
             
             lesson.setFile(file); // note: sets file only if no exception
             lesson.setCanSave(false);
-            m_recentFiles.push(file.getAbsolutePath());
+            mRecentFiles.push(file.getAbsolutePath());
             
-            for (LessonObserver observer : m_lessonObservers)
+            for (LessonObserver observer : mLessonObservers)
             {
                 observer.lessonSaved(lesson);
             }
@@ -210,7 +210,7 @@ public class Main extends Observable implements LearnSessionProvider,
      */
     public Lesson getLesson()
     {
-        return m_lesson;
+        return mLesson;
     }
 
     /* (non-Javadoc)
@@ -218,7 +218,7 @@ public class Main extends Observable implements LearnSessionProvider,
      */
     public RecentItems getRecentLessonFiles()
     {
-        return m_recentFiles;
+        return mRecentFiles;
     }
 
     /* (non-Javadoc)
@@ -226,7 +226,7 @@ public class Main extends Observable implements LearnSessionProvider,
      */
     public void addLessonObserver(LessonObserver observer)
     {
-        m_lessonObservers.add(observer);
+        mLessonObservers.add(observer);
     }
 
     /* (non-Javadoc)
@@ -234,7 +234,7 @@ public class Main extends Observable implements LearnSessionProvider,
      */
     public void removeLessonObserver(LessonObserver observer)
     {
-        m_lessonObservers.remove(observer);
+        mLessonObservers.remove(observer);
     }
     
     /**
@@ -244,7 +244,7 @@ public class Main extends Observable implements LearnSessionProvider,
      */
     public void addProgramEndObserver(ProgramEndObserver observer)
     {
-        m_programEndObservers.add(observer);
+        mProgramEndObservers.add(observer);
     }
     
     /**
@@ -252,7 +252,7 @@ public class Main extends Observable implements LearnSessionProvider,
      */
     public void removeProgramEndObserver(ProgramEndObserver observer)
     {
-        m_programEndObservers.remove(observer);
+        mProgramEndObservers.remove(observer);
     }
     
     /**
@@ -260,7 +260,7 @@ public class Main extends Observable implements LearnSessionProvider,
      */
     public void exit()
     {
-        for (ProgramEndObserver observer : m_programEndObservers)
+        for (ProgramEndObserver observer : mProgramEndObservers)
         {
             observer.onProgramEnd();
         }
@@ -277,9 +277,9 @@ public class Main extends Observable implements LearnSessionProvider,
         LearnSession session = new DefaultLearnSession(category, settings, 
             selectedCards, learnUnlearned, learnExpired, this);
         
-        m_runningSessions++;
+        mRunningSessions++;
         
-        for (LearnSessionObserver observer : m_learnSessionObservers)
+        for (LearnSessionObserver observer : mLearnSessionObservers)
         {
             observer.sessionStarted(session);
         }
@@ -294,11 +294,11 @@ public class Main extends Observable implements LearnSessionProvider,
      */
     public void sessionEnded(LearnSession session)
     {
-        m_runningSessions--;
+        mRunningSessions--;
         
         if (session.isRelevant())
         {
-            LearnHistory history = m_lesson.getLearnHistory();
+            LearnHistory history = mLesson.getLearnHistory();
             history.addSummary(
                 session.getStart(), 
                 session.getEnd(), 
@@ -308,7 +308,7 @@ public class Main extends Observable implements LearnSessionProvider,
                 session.getRelearnedCards().size());
         }
         
-        for (LearnSessionObserver observer : m_learnSessionObservers)
+        for (LearnSessionObserver observer : mLearnSessionObservers)
         {
             observer.sessionEnded(session);
         }
@@ -319,7 +319,7 @@ public class Main extends Observable implements LearnSessionProvider,
      */
     public boolean isSessionRunning()
     {
-        return m_runningSessions > 0;
+        return mRunningSessions > 0;
     }
 
     /* (non-Javadoc)
@@ -327,7 +327,7 @@ public class Main extends Observable implements LearnSessionProvider,
      */
     public void addLearnSessionObserver(LearnSessionObserver observer)
     {
-        m_learnSessionObservers.add(observer);
+        mLearnSessionObservers.add(observer);
     }
 
     /* (non-Javadoc)
@@ -335,7 +335,7 @@ public class Main extends Observable implements LearnSessionProvider,
      */
     public void removeLearnSessionObserver(LearnSessionObserver observer)
     {
-        m_learnSessionObservers.remove(observer);
+        mLearnSessionObservers.remove(observer);
     }
 
     /**
@@ -343,7 +343,7 @@ public class Main extends Observable implements LearnSessionProvider,
      */
     public MainFrame getFrame() 
     {
-        return m_frame;
+        return mFrame;
     }
 
     /**
@@ -351,7 +351,7 @@ public class Main extends Observable implements LearnSessionProvider,
      */
     public LearnSettings getLearnSettings()
     {
-        return m_learnSettings;
+        return mLearnSettings;
     }
     
     /**
@@ -359,7 +359,7 @@ public class Main extends Observable implements LearnSessionProvider,
      */
     public LearnHistory getGlobalLearnHistory()
     {
-        return m_globalLearnHistory;
+        return mGlobalLearnHistory;
     }
 
     /* (non-Javadoc)
@@ -367,7 +367,7 @@ public class Main extends Observable implements LearnSessionProvider,
      */
     public void onCardEvent(int type, Card card, Category category, int deck)
     {
-        fireLessonModified(m_lesson);
+        fireLessonModified(mLesson);
     }
 
     /* (non-Javadoc)
@@ -375,7 +375,7 @@ public class Main extends Observable implements LearnSessionProvider,
      */
     public void onCategoryEvent(int type, Category category)
     {
-        fireLessonModified(m_lesson);        
+        fireLessonModified(mLesson);
     }
 
     public Main()
@@ -391,8 +391,6 @@ public class Main extends Observable implements LearnSessionProvider,
             fh.setFormatter(new SimpleFormatter());
             logger.addHandler(fh);
             URL resource = getClass().getResource(PROPERTIES_PATH);
-            
-//            PROPERTIES.load(resource.openStream());
             
             if (resource != null)
             {
@@ -445,9 +443,9 @@ public class Main extends Observable implements LearnSessionProvider,
     // we have more information about the exception there.
     public static void logThrowable(String msg, Throwable t) 
     {
-        if (t != null && m_lastLoggedThrowable != t) 
+        if (t != null && mLastLoggedThrowable != t)
         {
-            m_lastLoggedThrowable = t;
+            mLastLoggedThrowable = t;
             logger.severe(msg);
             
             // TODO, consider writing these to the log file only once?
@@ -467,7 +465,7 @@ public class Main extends Observable implements LearnSessionProvider,
 
     public static void clearLastThrowable() 
     {
-        m_lastLoggedThrowable = null;
+        mLastLoggedThrowable = null;
     }
     
     private static void copyFile(File in, File out) throws IOException 
@@ -478,14 +476,14 @@ public class Main extends Observable implements LearnSessionProvider,
         {
             sourceChannel = new FileInputStream(in).getChannel();
             destinationChannel = new FileOutputStream(out).getChannel();
-            
+
             sourceChannel.transferTo(0, sourceChannel.size(), destinationChannel);
         }
         finally
         {
             if (sourceChannel != null)
                 sourceChannel.close();
-            
+
             if (destinationChannel != null)
                 destinationChannel.close();
         }
@@ -496,26 +494,26 @@ public class Main extends Observable implements LearnSessionProvider,
         createNewLesson();
         startStats();
         
-        m_frame = new MainFrame();
-        m_learnSettings = Settings.loadStrategy(m_frame);
-        m_frame.setVisible(true);
+        mFrame = new MainFrame();
+        mLearnSettings = Settings.loadStrategy(mFrame);
+        mFrame.setVisible(true);
         
         if (file != null)
         {
-            m_frame.loadLesson(file);
+            mFrame.loadLesson(file);
         }
     }
 
     private void startStats()
     {
-        m_globalLearnHistory = new LearnHistory(STATS_FILE);
+        mGlobalLearnHistory = new LearnHistory(STATS_FILE);
     }
     
     private void fireLessonLoaded(Lesson lesson)
     {
         lesson.getRootCategory().addObserver(this);
         
-        for (LessonObserver observer : m_lessonObservers)
+        for (LessonObserver observer : mLessonObservers)
         {
             observer.lessonLoaded(lesson);
         }
@@ -525,7 +523,7 @@ public class Main extends Observable implements LearnSessionProvider,
     {
         lesson.getRootCategory().removeObserver(this);
         
-        for (LessonObserver observer : m_lessonObservers)
+        for (LessonObserver observer : mLessonObservers)
         {
             observer.lessonClosed(lesson);
         }
@@ -535,7 +533,7 @@ public class Main extends Observable implements LearnSessionProvider,
     {
         if (lesson.canSave())
         {
-            for (LessonObserver observer : m_lessonObservers)
+            for (LessonObserver observer : mLessonObservers)
             {
                 observer.lessonModified(lesson);
             }
