@@ -49,15 +49,15 @@ import jmemorize.util.NaturalOrderComparator;
 public class Category implements Events
 {
     // TODO use CopyOnWriteArrayList in Java1.5
-    private List<CategoryObserver> m_observers       = new ArrayList<CategoryObserver>();
+    private List<CategoryObserver> mObservers = new ArrayList<>();
 
-    private String                 m_name;
-    private int                    m_depth           = 0;                     // is 0 for root category
+    private String mName;
+    private int mDepth = 0;                     // is 0 for root category
 
-    private List<List<Card>>       m_decks           = new ArrayList<List<Card>>(); // list of card lists
+    private List<List<Card>> mDecks = new ArrayList<>(); // list of card lists
 
-    private Category               m_parent;
-    private List<Category>         m_childCategories = new LinkedList<Category>();
+    private Category mParent;
+    private List<Category> mChildCategories = new LinkedList<>();
     
     /**
      * Creates a new Category.
@@ -66,7 +66,7 @@ public class Category implements Events
      */
     public Category(String name)
     {
-        m_name   = name;
+        mName = name;
     }
     
     /*
@@ -182,10 +182,10 @@ public class Category implements Events
      */
     public List<Card> getCards()
     {
-        List<Card> cardList = new ArrayList<Card>();
+        List<Card> cardList = new ArrayList<>();
         
         //get cards from all decks
-        for (int i=0; i < m_decks.size(); i++)
+        for (int i = 0; i < mDecks.size(); i++)
         {
             cardList.addAll(getCards(i));
         }
@@ -203,7 +203,7 @@ public class Category implements Events
     {
         if (level >= getNumberOfDecks())
         {
-            return new ArrayList<Card>(); //HACK
+            return new ArrayList<>(); //HACK
         }
         
         if (level == -1)
@@ -212,7 +212,7 @@ public class Category implements Events
         }
         
         //get cards in this category
-        List<Card> cardList = new ArrayList<Card>(m_decks.get(level));
+        List<Card> cardList = new ArrayList<>(mDecks.get(level));
         
         //get cards in child categories
         for (Category child : getChildCategories())
@@ -256,7 +256,7 @@ public class Category implements Events
         
         for (Iterator<Card> it = expiredCards.iterator(); it.hasNext();)
         {
-            Card card = (Card)it.next();
+            Card card = it.next();
             if (!card.isExpired())
             {
                 it.remove();
@@ -276,7 +276,7 @@ public class Category implements Events
         
         for (Iterator<Card> it = learnedCards.iterator(); it.hasNext();)
         {
-            Card card = (Card)it.next();
+            Card card = it.next();
             if (!card.isLearned())
             {
                 it.remove();
@@ -297,13 +297,13 @@ public class Category implements Events
         // level 0 decks have no learned cards
         if (level == 0)
         {
-            return new ArrayList<Card>();
+            return new ArrayList<>();
         }
         
         List<Card> learnedCards = getCards(level);        
         for (Iterator<Card> it = learnedCards.iterator(); it.hasNext();)
         {
-            Card card = (Card)it.next();
+            Card card = it.next();
             if (!card.isLearned())
             {
                 it.remove();
@@ -332,7 +332,7 @@ public class Category implements Events
      */
     public List<Card> getLearnableCards()
     {
-        List<Card> learnableCards = new LinkedList<Card>();
+        List<Card> learnableCards = new LinkedList<>();
         for (int i = 0; i < getNumberOfDecks(); i++)
         {
             learnableCards.addAll(getLearnableCards(i));
@@ -346,7 +346,7 @@ public class Category implements Events
      */
     public List<Card> getUnlearnedCards()
     {
-        return m_decks.size() > 0 ? getCards(0) : new ArrayList<Card>();
+        return mDecks.isEmpty() ? getCards(0) : new ArrayList<>();
     }
     
     /**
@@ -356,7 +356,7 @@ public class Category implements Events
      */
     public List<Card> getLocalCards()
     {
-        List<Card> localCards = new ArrayList<Card>();
+        List<Card> localCards = new ArrayList<>();
         for (int i = 0; i < getNumberOfDecks(); i++)
         {
             localCards.addAll(getLocalCards(i));
@@ -372,7 +372,7 @@ public class Category implements Events
      */
     public List<Card> getLocalCards(int level)
     {
-        return m_decks.get(level);
+        return mDecks.get(level);
     }
     
     /**
@@ -382,7 +382,7 @@ public class Category implements Events
      */
     public int getNumberOfDecks()
     {
-        return m_decks.size();
+        return mDecks.size();
     }    
     
     /*
@@ -394,7 +394,7 @@ public class Category implements Events
      */
     public List<Category> getChildCategories()
     {
-        return Collections.unmodifiableList(m_childCategories);
+        return Collections.unmodifiableList(mChildCategories);
     }
    
     
@@ -404,7 +404,7 @@ public class Category implements Events
      */
     public Category getChildCategory(String name)
     {
-        for (Category category : m_childCategories)
+        for (Category category : mChildCategories)
         {
             if (category.getName().equals(name))
                 return category;
@@ -418,13 +418,13 @@ public class Category implements Events
      */
     public Category addCategoryChild(Category category)
     {
-        category.m_parent = this;
-        category.m_depth  = m_depth + 1;
+        category.mParent = this;
+        category.mDepth = mDepth + 1;
         
         Comparator comp = new NaturalOrderComparator();
         
         int position = 0;
-        for (Category childCategory : m_childCategories)
+        for (Category childCategory : mChildCategories)
         {
             if (comp.compare(category.getName(), childCategory.getName()) < 0)
                 break;
@@ -432,7 +432,7 @@ public class Category implements Events
             position++;            
         }
 
-        m_childCategories.add(position, category);
+        mChildCategories.add(position, category);
 
         fireCategoryEvent(ADDED_EVENT, category);
         
@@ -446,12 +446,12 @@ public class Category implements Events
      */
     public void remove()
     {
-        assert m_parent != null : "Root category can't be deleted"; //$NON-NLS-1$
+        assert mParent != null : "Root category can't be deleted"; //$NON-NLS-1$
 
-        m_parent.m_childCategories.remove(this);
+        mParent.mChildCategories.remove(this);
         
         fireCategoryEvent(REMOVED_EVENT, this);
-        m_parent = null; // have to release parent AFTER firing event
+        mParent = null; // have to release parent AFTER firing event
     }
     
     /**
@@ -464,7 +464,7 @@ public class Category implements Events
             return true;
         }
         
-        for (Category cat : m_childCategories)
+        for (Category cat : mChildCategories)
         {
             if (cat.contains(category))
             {
@@ -481,7 +481,7 @@ public class Category implements Events
      */
     public Category getParent()
     {
-        return m_parent;
+        return mParent;
     }
     
     /**
@@ -493,9 +493,9 @@ public class Category implements Events
     {
         assert newName != null;
         
-        if (!m_name.equals(newName))
+        if (!mName.equals(newName))
         {
-            m_name = newName;
+            mName = newName;
             
             fireCategoryEvent(EDITED_EVENT, this);
         }
@@ -506,7 +506,7 @@ public class Category implements Events
      */
     public String getName()
     {
-        return m_name;
+        return mName;
     }
     
     /**
@@ -516,7 +516,7 @@ public class Category implements Events
      */
     public String getPath()
     {
-        return m_parent != null ? m_parent.getPath() +  "/" + getName() : getName(); //$NON-NLS-1$
+        return mParent != null ? mParent.getPath() +  "/" + getName() : getName(); //$NON-NLS-1$
     }
     
     /**
@@ -524,7 +524,7 @@ public class Category implements Events
      */
     public int getDepth()
     {
-        return m_depth;
+        return mDepth;
     }
     
     /**
@@ -532,10 +532,10 @@ public class Category implements Events
      */
     public List<Category> getSubtreeList() // TODO rename to getChildCategoriesTree
     {
-        List<Category> list = new ArrayList<Category>(m_childCategories.size() + 1);
+        List<Category> list = new ArrayList<>(mChildCategories.size() + 1);
         
         list.add(this);
-        for (Category category : m_childCategories)
+        for (Category category : mChildCategories)
         {
             list.addAll(category.getSubtreeList());
         }
@@ -548,7 +548,7 @@ public class Category implements Events
      */
     public String toString()
     {
-        return "Category("+m_name+")"; //$NON-NLS-1$ //$NON-NLS-2$
+        return "Category("+ mName +")"; //$NON-NLS-1$ //$NON-NLS-2$
     }
     
     /*
@@ -557,12 +557,12 @@ public class Category implements Events
     
     public void addObserver(CategoryObserver observer)
     {
-        m_observers.add(observer);
+        mObservers.add(observer);
     }
     
     public void removeObserver(CategoryObserver observer)
     {
-        m_observers.remove(observer);
+        mObservers.remove(observer);
     }
     
     /**
@@ -572,9 +572,9 @@ public class Category implements Events
      */
     public Category cloneWithoutProgress()
     {
-        Category clonedCategory = new Category(m_name);
+        Category clonedCategory = new Category(mName);
         
-        for (List<Card> cards : m_decks)
+        for (List<Card> cards : mDecks)
         {
             for (Card card : cards)
             {
@@ -584,7 +584,7 @@ public class Category implements Events
         
         for (Category childCategory : getChildCategories())
         {
-            clonedCategory.addCategoryChild((Category)childCategory.cloneWithoutProgress());
+            clonedCategory.addCategoryChild(childCategory.cloneWithoutProgress());
         }
         
         return clonedCategory;
@@ -597,12 +597,12 @@ public class Category implements Events
             adjustNumberOfDecks();
         }
         
-        if (m_parent != null)
+        if (mParent != null)
         {
-            m_parent.fireCardEvent(type, card, category, deck);
+            mParent.fireCardEvent(type, card, category, deck);
         }
         
-        List<CategoryObserver> observersCopy = new ArrayList<CategoryObserver>(m_observers);
+        List<CategoryObserver> observersCopy = new ArrayList<>(mObservers);
         for (CategoryObserver observer : observersCopy)
         {
             observer.onCardEvent(type, card, category, deck);
@@ -613,12 +613,12 @@ public class Category implements Events
     {
         adjustNumberOfDecks();
         
-        if (m_parent != null)
+        if (mParent != null)
         {
-            m_parent.fireCategoryEvent(type, category);
+            mParent.fireCategoryEvent(type, category);
         }
         
-        List<CategoryObserver> observersCopy = new ArrayList<CategoryObserver>(m_observers);
+        List<CategoryObserver> observersCopy = new ArrayList<>(mObservers);
         for (CategoryObserver observer : observersCopy)
         {
             observer.onCategoryEvent(type, category);
@@ -631,12 +631,12 @@ public class Category implements Events
     private void addCardInternal(Card card, int level)
     {
         // check boundary
-        while (m_decks.size() <= level)
+        while (mDecks.size() <= level)
         {
-            m_decks.add(new ArrayList<Card>());
+            mDecks.add(new ArrayList<>());
         }
         
-        List<Card> cards = m_decks.get(level);
+        List<Card> cards = mDecks.get(level);
         cards.add(card);
         
         card.setCategory(this);
@@ -659,7 +659,7 @@ public class Category implements Events
         if (cat == this)
         {
             int level = card.getLevel();
-            List<Card> cards = m_decks.get(level);
+            List<Card> cards = mDecks.get(level);
             cards.remove(card);
             
             card.setCategory(null);
@@ -696,7 +696,7 @@ public class Category implements Events
     {
         // find child category with most decks
         int maxChildDecks = 0;
-        for (Category child : m_childCategories)
+        for (Category child : mChildCategories)
         {
             if (child.getNumberOfDecks() > maxChildDecks)
             {
@@ -707,14 +707,14 @@ public class Category implements Events
         //grow decks
         while (maxChildDecks > getNumberOfDecks())
         {
-            m_decks.add(new ArrayList<Card>());
+            mDecks.add(new ArrayList<>());
         }
         
         //trim decks
         while (maxChildDecks < getNumberOfDecks() 
-            && (m_decks.get(getNumberOfDecks()-1)).isEmpty() )
+            && (mDecks.get(getNumberOfDecks()-1)).isEmpty() )
         {
-            m_decks.remove(getNumberOfDecks()-1);
+            mDecks.remove(getNumberOfDecks()-1);
         }
     }
 }

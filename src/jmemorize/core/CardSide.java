@@ -35,9 +35,9 @@ public class CardSide implements Cloneable
         public void onImagesChanged(CardSide cardSide, List<String> imageIDs);
     }
     
-    private FormattedText          m_text;
-    private List<String>           m_imageIDs  = new LinkedList<String>();
-    private List<CardSideObserver> m_observers = new LinkedList<CardSideObserver>();
+    private FormattedText mText;
+    private List<String> mImageIDs = new LinkedList<>();
+    private List<CardSideObserver> mObservers = new LinkedList<>();
     
     public CardSide()
     {
@@ -50,7 +50,7 @@ public class CardSide implements Cloneable
     
     public FormattedText getText()
     {
-        return m_text;
+        return mText;
     }
     
     /**
@@ -60,14 +60,14 @@ public class CardSide implements Cloneable
      */
     public void setText(FormattedText text)
     {
-        if (text.equals(m_text))
+        if (text.equals(mText))
             return;
         
-        m_text = text;
+        mText = text;
         
-        for (CardSideObserver observer : m_observers)
+        for (CardSideObserver observer : mObservers)
         {
-            observer.onTextChanged(this, m_text);
+            observer.onTextChanged(this, mText);
         }
     }
     
@@ -76,31 +76,31 @@ public class CardSide implements Cloneable
      */
     public List<String> getImages()
     {
-        return m_imageIDs;
+        return mImageIDs;
     }
     
     public void setImages(List<String> ids)
     {
-        if (m_imageIDs.equals(ids))
+        if (mImageIDs.equals(ids))
             return;
         
-        m_imageIDs.clear();
-        m_imageIDs.addAll(ids);
+        mImageIDs.clear();
+        mImageIDs.addAll(ids);
         
-        for (CardSideObserver observer : m_observers)
+        for (CardSideObserver observer : mObservers)
         {
-            observer.onImagesChanged(this, m_imageIDs);
+            observer.onImagesChanged(this, mImageIDs);
         }
     }
     
     public void addObserver(CardSideObserver observer)
     {
-        m_observers.add(observer);
+        mObservers.add(observer);
     }
     
     public void removeObserver(CardSideObserver observer)
     {
-        m_observers.remove(observer);
+        mObservers.remove(observer);
     }
     
     /** 
@@ -109,7 +109,7 @@ public class CardSide implements Cloneable
      */
     public String toString()
     {
-        return m_text.getUnformatted();
+        return mText.getUnformatted();
     }
     
     /* (non-Javadoc)
@@ -117,9 +117,10 @@ public class CardSide implements Cloneable
      */
     public Object clone() throws CloneNotSupportedException
     {
+        super.clone();
         CardSide cardSide = new CardSide();
-        cardSide.m_text = (FormattedText)m_text.clone();
-        cardSide.m_imageIDs.addAll(m_imageIDs);
+        cardSide.mText = (FormattedText) mText.clone();
+        cardSide.mImageIDs.addAll(mImageIDs);
         
         return cardSide;
     }
