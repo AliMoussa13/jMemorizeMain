@@ -7,10 +7,10 @@ t
 java:S2293_"YReplace the type specification in this constructor call with the diamond operator ("<>").(¾€ÉÑûÿÿÿÿ
 @
 java:S2629Ğ"$Invoke method(s) only conditionally.(ËÆè°şÿÿÿÿ
-e
-java:S2095à"NUse try-with-resources or close this "FileOutputStream" in a "finally" clause.(Ö·¥ö
 i
 java:S2095ß"MUse try-with-resources or close this "FileInputStream" in a "finally" clause.(¢âØøÿÿÿÿ
+e
+java:S2095à"NUse try-with-resources or close this "FileOutputStream" in a "finally" clause.(Ö·¥ö
 m	java:S116N"XRename this field "m_recentFiles" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÃíŒ„
 f	java:S116S"RRename this field "m_frame" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(†è…
 

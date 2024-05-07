@@ -129,6 +129,6 @@ public abstract class AbstractExportAction extends AbstractSessionDisabledAction
         }
     }
     
-    abstract protected void doExport(Lesson lesson, File file) throws IOException;
-    abstract protected ExtensionFileFilter getFileFilter();
+    protected abstract void doExport(Lesson lesson, File file) throws IOException;
+    protected abstract ExtensionFileFilter getFileFilter();
 }
