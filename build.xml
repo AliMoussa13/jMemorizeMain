@@ -107,11 +107,11 @@
         </javac>
 
         <!-- Convert translations from native format to ascii format -->
-        <native2ascii src="${resource}/text" dest="${build}/${resource}/text" 
-            includes="translation_*.native" ext=".properties"/>
+        <native2ascii src="src/resource/text" dest="${build}/${resource}/text"
+                      includes="translation_*.native" ext=".properties"/>
         
         <copy todir="${build}/${resource}">
-            <fileset dir="${resource}" />
+            <fileset dir="src/resource" />
         </copy>
 
         <!-- For missing keys use the english translation as fall-back -->
@@ -209,7 +209,7 @@
 
         <!-- Copy resources -->
         <copy todir="${dist.src.temp}/${project.file}/${resource}">
-            <fileset dir="${resource}" />
+            <fileset dir="src/resource" />
         </copy>
         	
         <!-- Copy fixtures -->
@@ -318,7 +318,7 @@
             <fileset dir="${dist.bin.temp}" />
             <fileset dir="${dist.src.temp}" />
             <fileset dir="${dist.win.temp}" />
-            <fileset dir="${resource}" includes="**/Thumbs.db" />
+            <fileset dir="src/resource" includes="**/Thumbs.db" />
         </delete>
     </target>
 
