@@ -39,7 +39,7 @@ public interface LearnSessionProvider
      * Creates a new learn session.
      * 
      * @param settings the settings that should be used in this session.
-     * @param the cards that were selected in the main card table when starting
+     * @param// the cards that were selected in the main card table when starting
      * the learn session (these will be learned if learnUnlearned and 
      * learnExpired are false).
      * @param category the base category that holds the cards for this session.
