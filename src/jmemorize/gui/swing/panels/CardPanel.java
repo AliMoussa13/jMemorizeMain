@@ -83,7 +83,7 @@ public class CardPanel extends JPanel
 {
     /**
      * A interface that allows to listen for textchanges to the card side text
-     * panes. Use {@link CardPanel#addTextObserver} method to hook it to
+     * panes. Use  method to hook it to
      * the CardPanel.
      */
     public interface CardPanelObserver
@@ -296,6 +296,32 @@ public class CardPanel extends JPanel
             StyleConstants.setUnderline(attr, enabled);
         }
     }
+
+    /**////////////////////////
+
+
+    public class IncreaseFontSizeAction extends AbstractStyledTextAction {
+        private static final int FONT_SIZE_INCREMENT = 2; // You can adjust this value as needed
+
+        public IncreaseFontSizeAction() {
+            super("increase-font-size");
+            addShortcut(KeyStroke.getKeyStroke(KeyEvent.VK_EQUALS, KeyEvent.CTRL_DOWN_MASK));
+        }
+
+        public boolean hasStyle(AttributeSet attr) {
+            return StyleConstants.getFontFamily(attr) != null;
+        }
+
+        public void setStyle(MutableAttributeSet attr, boolean enabled) {
+            int currentSize = StyleConstants.getFontSize(attr);
+            if (currentSize > 0) {
+                StyleConstants.setFontSize(attr, currentSize + FONT_SIZE_INCREMENT);
+            }
+        }
+    }
+
+    /**////////////////////////
+
     
     private class SupAction extends AbstractStyledTextAction
     {
@@ -673,7 +699,11 @@ public class CardPanel extends JPanel
         toolBar.add(createButton(new UnderlineAction(), "text_underline.png"));
         toolBar.add(createButton(new SupAction(), "text_superscript.png"));
         toolBar.add(createButton(new SubAction(), "text_subscript.png"));
-        
+
+        /******************/
+        toolBar.add(createButton(new IncreaseFontSizeAction(), "increase-font-16.png"));
+        /******************/
+
         toolBar.addSeparator();
         toolBar.add(createButton(new InsertImageAction(), "picture_add.png"));
         toolBar.add(createButton(new RemoveImageAction(), "picture_delete.png"));
@@ -704,6 +734,9 @@ public class CardPanel extends JPanel
             menu.add(createMenuItem(new UnderlineAction(), "Underline", "text_underline.png"));
             menu.add(createMenuItem(new SupAction(), "Superscript", "text_superscript.png"));
             menu.add(createMenuItem(new SubAction(), "Subscript", "text_subscript.png"));
+            /******************/
+            menu.add(createMenuItem(new IncreaseFontSizeAction(), "IncreaseFont", "increase-font-16.png"));
+            /******************/
         }
         
         return menu;
