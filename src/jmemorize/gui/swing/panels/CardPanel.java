@@ -258,6 +258,9 @@ public class CardPanel extends JPanel
             StyleConstants.setBold(attr, enabled);
         }
     }
+
+
+
     
     private class ItalicAction extends AbstractStyledTextAction
     {
@@ -316,6 +319,27 @@ public class CardPanel extends JPanel
             int currentSize = StyleConstants.getFontSize(attr);
             if (currentSize > 0) {
                 StyleConstants.setFontSize(attr, currentSize + FONT_SIZE_INCREMENT);
+            }
+        }
+    }
+
+
+    public class DecreaseFontSizeAction extends AbstractStyledTextAction {
+        private static final int FONT_SIZE_DECREMENT = 2; // You can adjust this value as needed
+
+        public DecreaseFontSizeAction() {
+            super("decrease-font-size");
+            addShortcut(KeyStroke.getKeyStroke(KeyEvent.VK_MINUS, KeyEvent.CTRL_DOWN_MASK));
+        }
+
+        public boolean hasStyle(AttributeSet attr) {
+            return StyleConstants.getFontFamily(attr) != null;
+        }
+
+        public void setStyle(MutableAttributeSet attr, boolean enabled) {
+            int currentSize = StyleConstants.getFontSize(attr);
+            if (currentSize > 0) {
+                StyleConstants.setFontSize(attr, Math.max(1, currentSize - FONT_SIZE_DECREMENT));
             }
         }
     }
@@ -702,6 +726,7 @@ public class CardPanel extends JPanel
 
         /******************/
         toolBar.add(createButton(new IncreaseFontSizeAction(), "increase-font-16.png"));
+        toolBar.add(createButton(new DecreaseFontSizeAction() , "decrease-font-16.png"));
         /******************/
 
         toolBar.addSeparator();
@@ -736,6 +761,7 @@ public class CardPanel extends JPanel
             menu.add(createMenuItem(new SubAction(), "Subscript", "text_subscript.png"));
             /******************/
             menu.add(createMenuItem(new IncreaseFontSizeAction(), "IncreaseFont", "increase-font-16.png"));
+            menu.add(createMenuItem(new DecreaseFontSizeAction(), "DecreaseFont", "decrease-font-16.png"));
             /******************/
         }
         
