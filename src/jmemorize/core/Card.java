@@ -31,28 +31,28 @@ import jmemorize.core.CardSide.CardSideObserver;
  */
 public class Card implements Events, Cloneable
 {
-    public static final long    ONE_DAY     = 1000 * 60 * 60 * 24;
+    public static final long    ONE_DAY     = 1000 * 60 * 60 * (long)24;
     public static final boolean CLONE_DATES = Main.isDevel();
 
-    private Category m_category;
-    private int      m_level;
+    private Category mCategory;
+    private int mLevel;
 
     // content
-    private CardSide m_frontSide = new CardSide();
-    private CardSide m_backSide  = new CardSide();
+    private CardSide mFrontSide = new CardSide();
+    private CardSide mBackSide = new CardSide();
     
     // dates
-    private Date     m_dateTested;
-    private Date     m_dateExpired;
-    private Date     m_dateCreated;
-    private Date     m_dateModified;
-    private Date     m_dateTouched; //this date is used internaly to order cards
+    private Date mDateTested;
+    private Date mDateExpired;
+    private Date mDateCreated;
+    private Date mDateModified;
+    private Date mDateTouched; //this date is used internaly to order cards
 
     // stats
-    private int      m_testsTotal;
-    private int      m_testsHit;    //succesfull learn repetitions
-    private int      m_frontHitsCorrect;
-    private int      m_backHitsCorrect;
+    private int mTestsTotal;
+    private int mTestsHit;    //succesfull learn repetitions
+    private int mFrontHitsCorrect;
+    private int mBackHitsCorrect;
 
     /**
      * Assumes formatted front- and backsides
@@ -82,12 +82,12 @@ public class Card implements Events, Cloneable
     
     public Card(Date created, CardSide frontSide, CardSide backSide)
     {
-        m_dateCreated = cloneDate(created);
-        m_dateModified = cloneDate(created);
-        m_dateTouched = cloneDate(created);
+        mDateCreated = cloneDate(created);
+        mDateModified = cloneDate(created);
+        mDateTouched = cloneDate(created);
 
-        m_frontSide = frontSide;
-        m_backSide = backSide;
+        mFrontSide = frontSide;
+        mBackSide = backSide;
         
         attachCardSideObservers();
     }
@@ -111,19 +111,19 @@ public class Card implements Events, Cloneable
     public void setSides(FormattedText front, FormattedText back) 
         throws IllegalArgumentException
     {
-        if (front.equals(m_frontSide.getText()) && 
-            back.equals(m_backSide.getText()))
+        if (front.equals(mFrontSide.getText()) &&
+            back.equals(mBackSide.getText()))
         {
             return;
         }
         
-        m_frontSide.setText(front);
-        m_backSide.setText(back);
+        mFrontSide.setText(front);
+        mBackSide.setText(back);
         
-        if (m_category != null)
+        if (mCategory != null)
         {
-            m_dateModified = new Date();
-            m_category.fireCardEvent(EDITED_EVENT, this, getCategory(), m_level);
+            mDateModified = new Date();
+            mCategory.fireCardEvent(EDITED_EVENT, this, getCategory(), mLevel);
         }
     }
     
@@ -141,7 +141,7 @@ public class Card implements Events, Cloneable
     {
         // TODO move to CardSide class
         
-        return frontside ? m_frontHitsCorrect :  m_backHitsCorrect;
+        return frontside ? mFrontHitsCorrect : mBackHitsCorrect;
     }
 
     /**
@@ -160,16 +160,16 @@ public class Card implements Events, Cloneable
         
         if (frontside)
         {
-            m_frontHitsCorrect = amount;
+            mFrontHitsCorrect = amount;
         }
         else
         {
-            m_backHitsCorrect = amount;
+            mBackHitsCorrect = amount;
         }
 
-        if (m_category != null)
+        if (mCategory != null)
         {
-            m_category.fireCardEvent(DECK_EVENT, this, getCategory(), m_level);
+            mCategory.fireCardEvent(DECK_EVENT, this, getCategory(), mLevel);
         }
     }
 
@@ -199,12 +199,12 @@ public class Card implements Events, Cloneable
 
     public CardSide getFrontSide()
     {
-        return m_frontSide;
+        return mFrontSide;
     }
 
     public CardSide getBackSide()
     {
-        return m_backSide;
+        return mBackSide;
     }
     
     /**
@@ -213,13 +213,13 @@ public class Card implements Events, Cloneable
      */
     public Date getDateTested()
     {
-        return cloneDate(m_dateTested);
+        return cloneDate(mDateTested);
     }
 
     public void setDateTested(Date date)
     {
-        m_dateTested = cloneDate(date);
-        m_dateTouched = cloneDate(date);
+        mDateTested = cloneDate(date);
+        mDateTouched = cloneDate(date);
     }
 
     /**
@@ -227,7 +227,7 @@ public class Card implements Events, Cloneable
      */
     public Date getDateExpired()
     {
-        return cloneDate(m_dateExpired);
+        return cloneDate(mDateExpired);
     }
 
     /**
@@ -235,7 +235,7 @@ public class Card implements Events, Cloneable
      */
     public void setDateExpired(Date date) // CHECK should this throw a event?
     {
-        m_dateExpired = cloneDate(date);
+        mDateExpired = cloneDate(date);
     }
 
     /**
@@ -243,7 +243,7 @@ public class Card implements Events, Cloneable
      */
     public Date getDateCreated()
     {
-        return cloneDate(m_dateCreated);
+        return cloneDate(mDateCreated);
     }
 
     public void setDateCreated(Date date)
@@ -251,7 +251,7 @@ public class Card implements Events, Cloneable
         if (date == null) 
             throw new NullPointerException();
         
-        m_dateCreated = cloneDate(date);
+        mDateCreated = cloneDate(date);
     }
     
     /**
@@ -259,7 +259,7 @@ public class Card implements Events, Cloneable
      */
     public Date getDateModified()
     {
-        return m_dateModified;
+        return mDateModified;
     }
 
     /**
@@ -267,11 +267,11 @@ public class Card implements Events, Cloneable
      */
     public void setDateModified(Date date)
     {
-        if (date.before(m_dateCreated))
+        if (date.before(mDateCreated))
             throw new IllegalArgumentException(
                 "Modification date can't be before creation date.");
         
-        m_dateModified = date;
+        mDateModified = date;
     }
 
     /**
@@ -281,12 +281,12 @@ public class Card implements Events, Cloneable
      */
     public Date getDateTouched()
     {
-        return cloneDate(m_dateTouched);
+        return cloneDate(mDateTouched);
     }
 
     public void setDateTouched(Date date)
     {
-        m_dateTouched = cloneDate(date);
+        mDateTouched = cloneDate(date);
     }
 
     /**
@@ -294,7 +294,7 @@ public class Card implements Events, Cloneable
      */
     public int getTestsTotal()
     {
-        return m_testsTotal;
+        return mTestsTotal;
     }
 
     /**
@@ -302,7 +302,7 @@ public class Card implements Events, Cloneable
      */
     public int getTestsPassed()
     {
-        return m_testsHit;
+        return mTestsHit;
     }
 
     /**
@@ -311,32 +311,32 @@ public class Card implements Events, Cloneable
      */
     public int getPassRatio()
     {
-        return (int)Math.round(100.0 * m_testsHit / m_testsTotal);
+        return (int)Math.round(100.0 * mTestsHit / mTestsTotal);
     }
 
     public void incStats(int hit, int total)
     {
-        m_testsTotal += total;
-        m_testsHit += hit;
+        mTestsTotal += total;
+        mTestsHit += hit;
     }
 
     public void resetStats()
     {
-        m_testsTotal = 0;
-        m_testsHit = 0;
+        mTestsTotal = 0;
+        mTestsHit = 0;
         
-        m_frontHitsCorrect = 0;
-        m_backHitsCorrect = 0;
+        mFrontHitsCorrect = 0;
+        mBackHitsCorrect = 0;
     }
 
     public Category getCategory()
     {
-        return m_category;
+        return mCategory;
     }
 
     protected void setCategory(Category category)
     {
-        m_category = category;
+        mCategory = category;
     }
 
     /**
@@ -348,8 +348,8 @@ public class Card implements Events, Cloneable
     public boolean isExpired()
     {
         Date now = Main.getNow();
-        return m_dateExpired != null && 
-            (m_dateExpired.before(now) || m_dateExpired.equals(now));
+        return mDateExpired != null &&
+            (mDateExpired.before(now) || mDateExpired.equals(now));
     }
 
     /**
@@ -360,7 +360,7 @@ public class Card implements Events, Cloneable
      */
     public boolean isLearned()
     {
-        return m_dateExpired != null && m_dateExpired.after(Main.getNow());
+        return mDateExpired != null && mDateExpired.after(Main.getNow());
     }
 
     /**
@@ -371,7 +371,7 @@ public class Card implements Events, Cloneable
      */
     public boolean isUnlearned()
     {
-        return m_dateExpired == null;
+        return mDateExpired == null;
     }
 
     /**
@@ -379,7 +379,7 @@ public class Card implements Events, Cloneable
      */
     public int getLevel()
     {
-        return m_level;
+        return mLevel;
     }
 
     /**
@@ -387,7 +387,7 @@ public class Card implements Events, Cloneable
      */
     protected void setLevel(int level)
     {
-        m_level = level;
+        mLevel = level;
     }
 
     /* (non-Javadoc)
@@ -399,16 +399,16 @@ public class Card implements Events, Cloneable
         try
         {
             card = (Card)super.clone();
-            card.m_frontSide = (CardSide)m_frontSide.clone();
-            card.m_backSide = (CardSide)m_backSide.clone();
+            card.mFrontSide = (CardSide) mFrontSide.clone();
+            card.mBackSide = (CardSide) mBackSide.clone();
             
-            card.m_dateCreated = cloneDate(m_dateCreated);
-            card.m_dateExpired = cloneDate(m_dateExpired);
-            card.m_dateModified = cloneDate(m_dateModified);
-            card.m_dateTested = cloneDate(m_dateTested);
-            card.m_dateTouched = cloneDate(m_dateTouched);
+            card.mDateCreated = cloneDate(mDateCreated);
+            card.mDateExpired = cloneDate(mDateExpired);
+            card.mDateModified = cloneDate(mDateModified);
+            card.mDateTested = cloneDate(mDateTested);
+            card.mDateTouched = cloneDate(mDateTouched);
             
-            card.m_category = null; // don't clone category
+            card.mCategory = null; // don't clone category
         }
         catch (CloneNotSupportedException e) 
         {
@@ -428,8 +428,8 @@ public class Card implements Events, Cloneable
     {
         try
         {
-            return new Card(m_dateCreated, 
-                (CardSide)m_frontSide.clone(), (CardSide)m_backSide.clone());
+            return new Card(mDateCreated,
+                (CardSide) mFrontSide.clone(), (CardSide) mBackSide.clone());
         }
         catch (CloneNotSupportedException e)
         {
@@ -443,7 +443,7 @@ public class Card implements Events, Cloneable
      */
     public String toString()
     {
-        return "("+m_frontSide+"/"+m_backSide+")";
+        return "("+ mFrontSide +"/"+ mBackSide +")";
     }
     
     private void attachCardSideObservers()
@@ -451,10 +451,10 @@ public class Card implements Events, Cloneable
         CardSideObserver observer = new CardSideObserver() {
             public void onImagesChanged(CardSide cardSide, List<String> imageIDs)
             {
-                if (m_category != null)
+                if (mCategory != null)
                 {
-                    m_dateModified = new Date();
-                    m_category.fireCardEvent(EDITED_EVENT, Card.this, getCategory(), m_level);
+                    mDateModified = new Date();
+                    mCategory.fireCardEvent(EDITED_EVENT, Card.this, getCategory(), mLevel);
                 }
             }
 
@@ -465,8 +465,8 @@ public class Card implements Events, Cloneable
             }
         };
         
-        m_frontSide.addObserver(observer);
-        m_backSide.addObserver(observer);
+        mFrontSide.addObserver(observer);
+        mBackSide.addObserver(observer);
     }
 
     /**
